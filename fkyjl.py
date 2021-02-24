@@ -9,7 +9,7 @@ def get_info():
     i=0
     while(i<=50):
         i+=1
-        time.sleep( 50 )
+        time.sleep( 1 )
         #获取html页面
         url = 'https://search.bilibili.com/all?keyword=%E7%96%AB%E8%8B%97%E7%A7%91%E6%99%AE'+"&page="+str(i)
         
@@ -23,7 +23,10 @@ def get_info():
         #解析页面，提取目标信息
         
         tree = etree.HTML(html)
-        lis = tree.xpath(u'/html/body/div[@id="server-search-app"]/div[@class="contain"]/div[@class="body-contain"]/div[@id="all-list"]/div[@class="flow-loader"]/div[@class="mixin-list"]/ul/li')
+        if i == 1:
+            lis = tree.xpath(u'/html/body/div[@id="server-search-app"]/div[@class="contain"]/div[@class="body-contain"]/div[@id="all-list"]/div[@class="flow-loader"]/div[@class="mixin-list"]/ul/li')
+        else:
+            lis = tree.xpath(u'/html/body/div[@id="server-search-app"]/div[@class="contain"]/div[@class="body-contain"]/div[@id="all-list"]/div[@class="flow-loader"]/ul/li')
         print(lis)
         for li in lis:
             info = []
